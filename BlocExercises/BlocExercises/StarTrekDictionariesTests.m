@@ -69,6 +69,8 @@
 - (void) testThatQuoteWasAdded {
     NSDictionary *resultDictionary = [self.starTrekDictionaries dictionaryWithQuoteAddedToStarTrekCharacterDictionary:self.picard];
     
+//    [resultDictionary setValue:@"test" forKey:@"rank"];
+    
     NSString *quote = resultDictionary[@"quote"];
     
     XCTAssertNotNil(quote, @"A quote was not included.");
