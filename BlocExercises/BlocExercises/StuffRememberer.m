@@ -13,56 +13,38 @@
 - (void) rememberThisArrayForLater:(NSMutableArray *)arrayToRemember {
     /* WORK HERE */
     
-//    if(self.arrayToRememberMutable == nil) {
-//        self.arrayToRememberMutable = [[NSMutableArray alloc] init];
-//    }
-//    
-//    self.arrayToRememberMutable = [arrayToRemember mutableCopy];
-    
     // just assign another pointer to the same object..
-    self.arrayToRememberMutable = arrayToRemember;
+    self.arrayToRemember = arrayToRemember;
 }
 
 - (void) copyThisArrayForLater:(NSMutableArray *)arrayToCopy {
     /* WORK HERE */
     
-    if(self.arrayYouShouldCopyMutable == nil) {
-            self.arrayYouShouldCopyMutable = [[NSMutableArray alloc] init];
-    }
-      // no (copy) property and use this?
-//    self.arrayYouShouldCopyMutable = [arrayToCopy mutableCopy];
-    self.arrayYouShouldCopyMutable = arrayToCopy;
-
+    self.arrayToCopy = [arrayToCopy mutableCopy];
 }
 
 - (void) rememberThisFloatForLater:(CGFloat)floatToRemember {
     /* WORK HERE */
     
-    self.floatRemember = floatToRemember;
-    
+    self.floatToRemember = floatToRemember;
 }
 
 - (NSMutableArray *) arrayYouShouldRemember {
     /* WORK HERE */
     
-    // This doesn't work since it will create a new object
-    //    return [self.arrayToRememberMutable mutableCopy];
-    
-    return self.arrayToRememberMutable;
-
+    return _arrayToRemember;
 }
 
 - (NSMutableArray *) arrayYouShouldCopy {
     /* WORK HERE */
-    return [self.arrayYouShouldCopyMutable mutableCopy];
+    
+    return _arrayToCopy;
 }
 
 - (CGFloat) floatYouShouldRemember {
     /* WORK HERE */
     
-    // wants you to return NSNotFound if no float exists,
-    // but that is type NSInteger??
-    return self.floatRemember;
+    return _floatToRemember;
 }
 
 @end
