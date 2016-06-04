@@ -1,4 +1,5 @@
 import UIKit
+import Foundation
 
 /*
 
@@ -8,7 +9,7 @@ Strings
 
 func favoriteCheeseStringWithCheese(cheese: String) -> String {
     // WORK HERE
-    return cheese
+    return "My favorite cheese is " + cheese
 }
 
 let fullSentence = favoriteCheeseStringWithCheese("cheddar")
@@ -20,13 +21,19 @@ Arrays & Dictionaries
 
 */
 
-let numberArray = [1, 2, 3, 4]
+// changed to var so we can add things..
+var numberArray = [1, 2, 3, 4]
 // Add 5 to this array
 // WORK HERE
+numberArray.append(5)
 
-let numberDictionary = [1 : "one", 2 : "two", 3 : "three", 4 : "four"]
+var numberDictionary = [1 : "one", 2 : "two", 3 : "three", 4 : "four"]
 // Add 5 : "five" to this dictionary
 // WORK HERE
+if numberDictionary.updateValue("five", forKey: 5) == nil {
+    numberDictionary
+}
+
 
 /*
 
@@ -36,9 +43,15 @@ Loops
 
 // Use a closed range loop to print 1 - 10, inclusively
 // WORK HERE
+for i in 1...10 {
+    print(i)
+}
 
 // Use a half-closed range loop to print 1 - 10, inclusively
 // WORK HERE
+for j in 1..<11 {
+    print(j)
+}
 
 let worf = [
     "name": "Worf",
@@ -58,9 +71,23 @@ let characters = [worf, picard]
 func favoriteDrinksArrayForCharacters(characters:[[String : String]]) -> [String] {
     // return an array of favorite drinks, like ["prune juice", "tea, Earl Grey, hot"]
     // WORK HERE
-    return []
+    var drinks = [String]()
+    for name in characters {
+        if let drinkType = name["favorite drink"] {
+            drinks.append(drinkType)
+        }
+            }
+    return drinks
 }
-
+    // above seems better than this...
+/*
+    for name in characters {
+        drinks.append(name["favorite drink"]!)
+    }
+    return drinks
+}
+*/
+    
 let favoriteDrinks = favoriteDrinksArrayForCharacters(characters)
 
 favoriteDrinks
@@ -75,7 +102,12 @@ func emailFromUserDict(userDict : [String : String]) -> String {
     // Return the user's email address from userDict, or return "" if they don't have one
     
     // WORK HERE
-    return "user@example.com"
+    var email = ""
+    // so if let assigns and unwraps the optional, but if let email = ... doesn't work without intermediate variable?
+    if let emailOpt = userDict["email"] {
+        email = emailOpt
+    }
+    return email
 }
 
 
@@ -100,9 +132,28 @@ Functions
 let strings = ["milk", "eggs", "bread", "challah"]
 
 // WORK HERE - make your function and pass `strings` in
+func arrayToString(inputArray : [String]) -> String {
+    var output = ""
+    var i = 1
+    for item in inputArray {
+        if i < inputArray.count {
+            output += item + ";"
+            i += 1
+        } else {
+            output += item
+        }
+    }
+//    another way to do it... skip the if/else
+//    output.removeAtIndex(output.endIndex.predecessor())
+    
+//     an even simpler way..
+//    let c = strings.joinWithSeparator(";")
+    
+    return output
+}
 
 let expectedOutput = "milk;eggs;bread;challah"
-
+arrayToString(strings) == expectedOutput
 /*
 
 Closures
@@ -113,3 +164,18 @@ let cerealArray = ["Golden Grahams", "Cheerios", "Trix", "Cap'n Crunch OOPS! All
 
 // Use a closure to sort this array alphabetically
 // WORK HERE
+
+// took me a while to figure out sorter() became sort() in Swift 2..
+
+var cerealSorted = cerealArray.sort( { (first, second ) -> Bool in
+    return first < second
+})
+
+// or using operator overloading..
+
+var cerealSortedOverload = cerealArray.sort({a, b in a < b})
+cerealSortedOverload
+
+cerealSorted == cerealSortedOverload
+
+
